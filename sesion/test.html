@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prueba html</title>
+  </head>
+  <body>
+    <h1>probando fetch</h1>
+    <button id="send">fetch</button>
+    <script>
+      const btn = document.getElementById("send");
+
+      btn.addEventListener("click", () => {
+        fetch("http://127.0.0.1:3000/endpoint", {
+          method: "POST",
+          body: '{"code": 1}',
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

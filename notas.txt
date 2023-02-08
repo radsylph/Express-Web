@@ -1,0 +1,27 @@
+clase #5: sesiones.
+palabras claves: browser, cookies, sesiones, capas de aplicacion, socket con express.
+req.sesion y req.sesion(express);
+
+sesion: como tal es un objeto que posee todos los datos de un usuario especifico a modo de
+servir como capa de resentacion, a su solicitudes multiples que se le puedan presentar. puede 
+ser visto como una vista enlazada, esta informacion se guarda en las cookies, 
+
+el cliente tiene cookies (informacion), ese cliente se conecta con un servidor mediante tecp/ip.
+el servidor tiene endpoint, el servidor maneja muchas capas, una de ellas es la de sesion.
+una capa de sesion es compartida para todos los usuarios, a la igual que lade aplicacion.
+el servidor tiene acceso a esas capas (de sesion y de aplicacion), mediante sockets.
+
+en el caso de express tiene un middleware, en el request tiene un objeto llamado sesion.
+
+el socket cuando recibe informacio tiene que atender esa para luego poder atender otra, esto lo hace mediant hilos.
+
+//instalar cookie parser, express sesion
+
+clase 4, 
+CORVAC
+programacion distribuida
+rfs
+cookieparser
+programacion paralela
+manejo de balance carga
+sistemas embedidos
