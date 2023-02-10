@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="Logged/logged.css" />
+    <script src="Logged/logged.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="card-header"></div>
+        <div class="card-body">
+          <div class="inner">
+            <div
+              style="
+                font-size: 18px;
+                letter-spacing: 0.5px;
+                margin-bottom: 10px;
+              "
+            >
+              Victor Crest<span class="color__gray" style="margin-left: 10px"
+                >26</span
+              >
+            </div>
+            <div
+              class="color__gray"
+              style="font-size: 13px; letter-spacing: 0.5px"
+            >
+              London
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="button-7" id="Out-btn">Log Out</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      let test = document.getElementById("Out-btn");
+      test.addEventListener("click", () => {
+        window.location.href = "http://localhost:3000/";
+      });
+    </script>
+  </body>
+</html>

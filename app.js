@@ -1,63 +1,68 @@
 import express from "express";
-import session from "express-session";
-import usuarioRoutes from "./sesion/routes/usuarioRoutes.js";
-import pgstore from "express-pg-session";
-import pg from "pg";
 import cors from "cors";
-const { Client, Pool } = pg;
-//import { Pool, Client } from pg;
-
+import session from "express-session";
+import router from "./router/Routes.js";
+import bd from "./settings.js";
+//const bd = require("./settings.js");
 const app = express();
-const port = 3000;
-const data = {
-  user: "postgres",
-  host: "localhost",
-  database: "postgres",
-  password: "123",
-  port: 5432,
-};
 
-const client = new Client(data);
-
-/*const client = new Client({
-  user: "postgres",
-  host: "localhost",
-  database: "postgres",
-  password: "123",
-  port: 5432,
-});*/
-
-app.use("/", usuarioRoutes);
+app.use(cors());
+app.use(express.json());
+app.set("port", 3000);
+app.use(express.static("public"));
 app.use(
   session({
-    secret: "contraseña",
+    secret: "secret",
     resave: false,
-    saveUninitialized: true, //una vez que se arranque el sevidor no se vuelve a inicializar
-    cookie: { temporizador: 6000,  },
-    verification: true,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24,
+      httpOnly: true,
+      secure: false,
+    },
   })
 );
+app.use("/", router);
 
-app.use("/login", (req, res) => {
-  if (req.session.intentos === 1) {
-    req.session.verification = false;
-    if(req.session.verification != true){
-      res.end("<p><strong>muchas vistas mi loco</strong></p>")
-    }
-    else{
-      res.send("intentos acabados");
-    }
-
-  } else {
-    req.session.usuario = "user";
-    req.session.rol = "admin";
-    req.session.intentos = req.session.intentos ? --req.session.intentos: 3;
-    console.log(req.session);
-    res.send(
-      `el usuario <strong>${req.session.usuario}</strong> es <strong>${req.session.rol}</strong> y quedan <strong>${req.session.intentos}</strong> intentos`
-    );
-  }
+app.listen(app.get("port"), "", () => {
+  console.log("Server is running on port: " + app.get("port"));
 });
 
-app.use("/", usuarioRoutes);
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+/*app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname,'/public/main/index.html'));
+});*/
+
+/*const users = new Map();
+app.post('/registerUser', (req, res) => {
+    users.set(req.body.email, req.body.password)
+    res.send({message: 'User added successfully'})
+    console.log("created")
+})*/
+
+/*app.post('/loginUser', (req, res) => {
+    
+    if(users.has(req.body.email)){
+        if(users.get(req.body.email) === req.body.password){
+            
+            req.session.logged=true;
+            res.send({message:true})
+            
+        }else{
+            console.log('2')
+            res.send({message: 'Wrong password'})
+        } 
+    } else {
+        res.send({message: 'User not found'})
+    }
+
+})*/
+
+/*app.get('/home', (req, res) => {
+
+    if(req.session.logged){ 
+        res.sendFile(path.join(__dirname,'/public/Logged/logged.html'));
+    }else{
+        //redirecciona pa fuera
+    }
+
+})*/
